@@ -1,6 +1,6 @@
 class SeasonManager
   def initialize(hash)
-    @seasons = hash # keys = seasons, values = array of game objects
+    @seasons = hash 
   end
 
   def games_in_season(season)
