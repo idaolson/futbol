@@ -14,9 +14,9 @@ class GameManager
     @id_hash = {}
   end
 
-  def games_by_team_id(id)
+  def games_by_team_id(team_id)
     @games.find_all do |game|
-      game.away_team_id == id || game.home_team_id == id
+      game.away_team_id == team_id || game.home_team_id == team_id
     end
   end
 
@@ -90,9 +90,8 @@ class GameManager
     end
   end
 
-
   def average_goals_per_game
-    total_game_score.sum.fdiv(@games.count).round(2)
+    total_game_score.sum.fdiv(total_games).round(2)
   end
 
   def average_goals_by_season
@@ -101,7 +100,7 @@ class GameManager
       sum_of_goals = games.sum do |game|
         add(game.away_goals.to_f, game.home_goals.to_f)
         end
-      goals_by_season[season] = sum_of_goals.fdiv(games.count).round(2)
+      goals_by_season[season] = average(sum_of_goals, games.count).round(2)
     end
     goals_by_season
   end
