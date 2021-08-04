@@ -73,27 +73,23 @@ RSpec.describe StatTracker do
     expect(@stat_tracker.best_offense).to eq("FC Dallas")
   end
 
-  it "returns the name of the team with the highest avg goals per game" do
-    expect(@stat_tracker.best_offense).to eq("FC Dallas")
-  end
-
   it "returns the name of the team with the lowest avg goals per game" do
     expect(@stat_tracker.worst_offense).to eq("Sporting Kansas City")
   end
 
-  it "text" do
+  it "returns the name of the visitor with the highest average goals per game" do
     expect(@stat_tracker.highest_scoring_visitor).to eq("FC Dallas")
   end
 
-  it "text" do
+  it "returns the name of the home team with the highest average goals per game" do
     expect(@stat_tracker.highest_scoring_home_team).to eq("FC Dallas")
   end
 
-  it "text" do
+  it "returns the name of the visitor with the lowest average goals per game" do
     expect(@stat_tracker.lowest_scoring_visitor).to eq("Sporting Kansas City")
   end
 
-  it "text" do
+  it "returns the name of the home team with the lowest average goals per game" do
     expect(@stat_tracker.lowest_scoring_home_team).to eq("Sporting Kansas City")
   end
 
