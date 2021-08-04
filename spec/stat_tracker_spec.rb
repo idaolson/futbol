@@ -77,19 +77,19 @@ RSpec.describe StatTracker do
     expect(@stat_tracker.worst_offense).to eq("Utah Royals FC")
   end
 
-  it "text" do
+  it "returns the name of the visitor with the highest average goals per game" do
     expect(@stat_tracker.highest_scoring_visitor).to eq("FC Dallas")
   end
 
-  it "text" do
+  it "returns the name of the home team with the highest average goals per game" do
     expect(@stat_tracker.highest_scoring_home_team).to eq("Reign FC")
   end
 
-  it "text" do
+  it "returns the name of the visitor with the lowest average goals per game" do
     expect(@stat_tracker.lowest_scoring_visitor).to eq("San Jose Earthquakes")
   end
 
-  it "text" do
+  it "returns the name of the home team with the lowest average goals per game" do
     expect(@stat_tracker.lowest_scoring_home_team).to eq("Utah Royals FC")
   end
 
