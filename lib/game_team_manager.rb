@@ -45,7 +45,7 @@ class GameTeamManager
   end
 
   def win_percentage(collection)
-    (wins(collection) / total_games(collection).to_f * 100).round(2)
+    percentage(wins(collection).to_f, total_games(collection)).round(2)
   end
 
   def winningest_coach(game_ids)
@@ -93,7 +93,7 @@ class GameTeamManager
   end
 
   def team_accuracy(collection)
-    (total_shots(collection).to_f / total_goals(collection)).round(3)
+    compute_average(total_shots(collection), total_goals(collection).to_f).round(3)
   end
 
   def most_accurate_team(season_game_ids)

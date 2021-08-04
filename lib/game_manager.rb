@@ -22,7 +22,7 @@ class GameManager
 
   def total_game_score
     @games.map do |game|
-      game.away_goals.to_i + game.home_goals.to_i
+      add(game.away_goals.to_i, game.home_goals.to_i)
     end
   end
 
@@ -49,7 +49,7 @@ class GameManager
   end
 
   def percentage_home_wins
-    (home_wins_count.to_f / total_games).round(2)
+    compute_average(home_wins_count.to_f, total_games).round(2)
   end
 
   def visitor_wins_count
@@ -59,15 +59,15 @@ class GameManager
   end
 
   def percentage_visitor_wins
-    (visitor_wins_count.to_f / total_games).round(2)
+    compute_average(visitor_wins_count.to_f, total_games).round(2)
   end
 
   def tie_count
-    total_games - (home_wins_count + visitor_wins_count)
+    subtract(total_games, add(home_wins_count, visitor_wins_count))
   end
 
   def percent_ties
-    (tie_count.to_f / total_games).round(2)
+    compute_average(tie_count.to_f, total_games).round(2)
   end
 
   def game_by_id(id)
@@ -99,7 +99,7 @@ class GameManager
     goals_by_season = {}
     games_by_season.map do |season, games|
       sum_of_goals = games.sum do |game|
-        game.away_goals.to_f + game.home_goals.to_f
+        add(game.away_goals.to_f, game.home_goals.to_f)
         end
       goals_by_season[season] = sum_of_goals.fdiv(games.count).round(2)
     end
