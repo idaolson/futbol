@@ -6,8 +6,6 @@ require_relative './game_team_manager'
 require_relative './season_manager'
 require_relative './team_manager'
 require 'csv'
-require 'pry'
-
 
 class StatTracker
   attr_reader :game_manager, :team_manager, :game_team_manager, :season_manager
@@ -24,7 +22,6 @@ class StatTracker
   end
 
   #game stats
-
   def highest_total_score
     @game_manager.highest_total_score
   end
@@ -120,7 +117,6 @@ class StatTracker
   end
 
   # Team stats
-
   def team_info(team_id)
     @team_manager.team_info(team_id)
   end
