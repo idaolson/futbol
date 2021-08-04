@@ -1,11 +1,7 @@
-require_relative './game_team'
-require_relative './mathable'
-
 class GameTeamManager
   include Mathable
 
   attr_reader :game_teams
-
   def initialize(locations)
     @game_teams = GameTeam.read_file(locations[:game_teams])
   end
@@ -28,10 +24,9 @@ class GameTeamManager
     all = game_ids.flat_map do |game_id|
       by_game_id(game_id)
     end
-    filtered = all.filter do |game_team|
+    all.filter do |game_team|
       game_team.head_coach == coach
     end
-    filtered
   end
 
   def wins(collection)
@@ -49,17 +44,15 @@ class GameTeamManager
   end
 
   def winningest_coach(game_ids)
-    winningest = coaches(game_ids).max_by do |coach|
+    coaches(game_ids).max_by do |coach|
       win_percentage(by_coach(game_ids, coach))
     end
-    winningest
   end
 
   def worst_coach(game_ids)
-    worst_team = coaches(game_ids).min_by do |coach|
+    coaches(game_ids).min_by do |coach|
       win_percentage(by_coach(game_ids, coach))
     end
-    worst_team
   end
 
   def by_team_id(collection, team_id)
@@ -97,18 +90,14 @@ class GameTeamManager
   end
 
   def most_accurate_team(season_game_ids)
-    collection = season_collection(season_game_ids)
-    team_ids = team_ids(collection)
-    team_ids.min_by do |team_id|
-      team_accuracy(by_team_id(collection, team_id))
+    team_ids(season_collection(season_game_ids)).min_by do |team_id|
+      team_accuracy(by_team_id(season_collection(season_game_ids), team_id))
     end
   end
 
   def least_accurate_team(season_game_ids)
-    collection = season_collection(season_game_ids)
-    team_ids = team_ids(collection)
-    team_ids.max_by do |team_id|
-      team_accuracy(by_team_id(collection, team_id))
+    team_ids(season_collection(season_game_ids)).max_by do |team_id|
+      team_accuracy(by_team_id(season_collection(season_game_ids), team_id))
     end
   end
 
@@ -119,22 +108,16 @@ class GameTeamManager
   end
 
   def most_tackles(season_game_ids)
-    collection = season_collection(season_game_ids)
-    team_ids = team_ids(collection)
-    team_ids.max_by do |team_id|
-      team_tackles(collection, team_id)
+    team_ids(season_collection(season_game_ids)).max_by do |team_id|
+      team_tackles(season_collection(season_game_ids), team_id)
     end
   end
 
   def fewest_tackles(season_game_ids)
-    collection = season_collection(season_game_ids)
-    team_ids = team_ids(collection)
-    team_ids.min_by do |team_id|
-      team_tackles(collection, team_id)
+    team_ids(season_collection(season_game_ids)).min_by do |team_id|
+      team_tackles(season_collection(season_game_ids), team_id)
     end
   end
-
-  # LEAGUE METHODS
 
   def goals_by_team
     @game_teams.reduce({}) do |sorted_goals, game_team|
