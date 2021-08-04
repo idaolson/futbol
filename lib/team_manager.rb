@@ -3,6 +3,7 @@ require_relative './game_manager'
 require_relative './game'
 
 class TeamManager
+  include Mathable
   attr_reader :teams
 
   def initialize(locations)
@@ -63,7 +64,7 @@ class TeamManager
     total_wins = games.count do |game|
     winning_team(id, game)
     end
-    (total_wins.fdiv(games.count)).round(2)
+    compute_average(total_wins.to_f,games.count).round(2)
   end
 
   def average_win_percentage(id)
