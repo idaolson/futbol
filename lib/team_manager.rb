@@ -57,7 +57,7 @@ class TeamManager
   end
 
   def winning_team(id, game)
-    game.home_team_id == id && game.home_goals > game.away_goals || game.away_team_id == id && game.away_goals > game.home_goals
+    (game.home_team_id == id && game.home_goals > game.away_goals) || (game.away_team_id == id && game.away_goals > game.home_goals)
   end
 
   def win_percentage(id, games)
