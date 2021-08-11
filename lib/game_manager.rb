@@ -100,7 +100,7 @@ class GameManager
       sum_of_goals = games.sum do |game|
         add(game.away_goals.to_f, game.home_goals.to_f)
         end
-      goals_by_season[season] = average(sum_of_goals, games.count).round(2)
+      goals_by_season[season] = compute_average(sum_of_goals, games.count).round(2)
     end
     goals_by_season
   end
